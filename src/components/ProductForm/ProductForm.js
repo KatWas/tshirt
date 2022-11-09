@@ -1,39 +1,30 @@
 import styles from './ProductForm.module.scss';
-import Button from '../Button/Button';
+import Button from '../Button/Button.js';
+import OptionColor from '../OptionColor/OptionColor.js';
 import OptionSize from '../OptionSize/OptionSize';
-import OptionColor from '../OptionColor/OptionColor';
 import PropTypes from 'prop-types';
 
-const ProductForm = (props) => {
-  return (
-    <form onSubmit={props.handleSubmit}>
-      <OptionSize
-        sizes={props.sizes}
-        currentSize={props.currentSize}
-        setCurrentSize={props.setCurrentSize}
-      />
-      <OptionColor
-        colors={props.colors}
-        prepareColorClassName={props.prepareColorClassName}
-        currentColor={props.currentColor}
-        setCurrentColor={props.setCurrentColor}
-      />
-      <Button handleSubmit={props.handleSubmit} className={styles.button}>
-        <span className='fa fa-shopping-cart' />
-      </Button>
-    </form>
-  );
+const ProductForm = ({ colors, sizes, currentColor, currentSize, setCurrentColor, setCurrentSize, handleSubmit }) => {
+
+	return (
+		<form onSubmit={handleSubmit}>
+          <OptionSize sizes={sizes} currentSize={currentSize} setCurrentSize={setCurrentSize} />
+          <OptionColor colors={colors} currentColor={currentColor} setCurrentColor={setCurrentColor} />
+          <Button className={styles.button}>
+            <span className="fa fa-shopping-cart" />
+          </Button>
+        </form>
+	);
 };
 
 ProductForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  sizes: PropTypes.array.isRequired,
-  currentSize: PropTypes.string.isRequired,
-  setCurrentSize: PropTypes.func.isRequired,
-  currentColor: PropTypes.string.isRequired,
-  setCurrentColor: PropTypes.func.isRequired,
-  prepareColorClassName: PropTypes.func.isRequired,
   colors: PropTypes.array.isRequired,
-};
+  sizes: PropTypes.array.isRequired,
+  currentColor: PropTypes.string.isRequired,
+  currentSize: PropTypes.string.isRequired,
+  setCurrentColor: PropTypes.func.isRequired,
+  setCurrentSize: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+}
 
 export default ProductForm;
